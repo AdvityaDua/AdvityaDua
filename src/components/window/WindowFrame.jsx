@@ -1,13 +1,17 @@
 import { Rnd } from 'react-rnd';
 import { X, Minus, Maximize2 } from 'lucide-react';
 import { useSystemStore } from '../../store/systemStore';
-import { motion } from 'framer-motion';
 
 export default function WindowFrame({ window }) {
     const { closeWindow, minimizeWindow, toggleMaximize, focusWindow, updateWindowPosition, updateWindowSize } = useSystemStore();
     const { id, title, position, size, zIndex, minimized, component: Content } = window;
     const isMaximized = window.maximized;
     if (minimized) return null;
+
+    const maximizedSize = {
+        width: '100vw',
+        height: 'calc(100vh - 112px)',
+    };
 
     return (
         <Rnd
@@ -18,10 +22,10 @@ export default function WindowFrame({ window }) {
                 height: size.height,
             }}
             position={isMaximized ? { x: 0, y: 32 } : position}
-            size={isMaximized ? { width: '100%', height: '' } : size}
+            size={isMaximized ? maximizedSize : size}
             minWidth={300}
             minHeight={200}
-            bounds={isMaximized ? false : "parent"}
+            bounds="parent"
             disableDragging={isMaximized}
             enableResizing={!isMaximized}
             onDragStop={(e, d) => !isMaximized && updateWindowPosition(id, { x: d.x, y: d.y })}
@@ -34,7 +38,7 @@ export default function WindowFrame({ window }) {
             onMouseDown={() => focusWindow(id)}
             style={{ zIndex, display: 'flex' }}
             dragHandleClassName="window-header"
-            className={`flex flex-col bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl overflow-hidden pointer-events-auto ${isMaximized ? '!rounded-none border-0 !h-[calc(100vh-112px)]' : ''}`}
+            className={`flex flex-col bg-white/88 dark:bg-zinc-950/88 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl overflow-hidden pointer-events-auto ${isMaximized ? '!rounded-none !border-x-0' : ''}`}
         >
             {/* Window Header */}
             <div
@@ -70,7 +74,7 @@ export default function WindowFrame({ window }) {
             </div>
 
             {/* Window Content - Removed overflow-auto to let child handle it */}
-            <div className="flex-1 overflow-hidden bg-white/50 p-0 relative">
+            <div className="flex-1 overflow-hidden bg-white/75 dark:bg-zinc-900/75 p-0 relative">
                 <div className="absolute inset-0 overflow-auto">
                     <Content />
                 </div>

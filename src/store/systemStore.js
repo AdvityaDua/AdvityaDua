@@ -3,8 +3,9 @@ import { create } from 'zustand';
 export const useSystemStore = create((set, get) => ({
     windows: [],
     activeWindowId: null,
-    zIndexes: {},
     nextZIndex: 1,
+    dockVisible: true,
+    wallpaper: 'mountains',
 
     openWindow: (id, title, component, defaultSize = { width: 600, height: 400 }) => {
         const { windows, nextZIndex } = get();
@@ -15,30 +16,43 @@ export const useSystemStore = create((set, get) => ({
             return;
         }
 
+        const viewport = typeof window === 'undefined' ? null : window;
+        const width = viewport ? Math.min(defaultSize.width, Math.max(320, viewport.innerWidth - 32)) : defaultSize.width;
+        const height = viewport ? Math.min(defaultSize.height, Math.max(240, viewport.innerHeight - 120)) : defaultSize.height;
+        const position = {
+            x: viewport ? Math.min(100 + windows.length * 30, Math.max(16, viewport.innerWidth - width - 16)) : 100 + windows.length * 30,
+            y: viewport ? Math.min(100 + windows.length * 30, Math.max(48, viewport.innerHeight - height - 72)) : 100 + windows.length * 30,
+        };
+
         const newWindow = {
             id,
             title,
             component,
             minimized: false,
-            size: defaultSize,
-            position: { x: 100 + windows.length * 30, y: 100 + windows.length * 30 }, // Cascade effect
+            size: { width, height },
+            zIndex: nextZIndex,
+            snap: null,
+            position,
         };
 
         set((state) => ({
             windows: [...state.windows, newWindow],
             activeWindowId: id,
-            zIndexes: { ...state.zIndexes, [id]: nextZIndex },
             nextZIndex: nextZIndex + 1,
         }));
     },
 
     closeWindow: (id) => {
-        set((state) => ({
-            windows: state.windows.filter((w) => w.id !== id),
-            activeWindowId: state.windows.length > 1 && state.activeWindowId === id
-                ? state.windows[state.windows.length - 2].id // Focus previous window if active one closes
-                : state.activeWindowId,
-        }));
+        set((state) => {
+            const windows = state.windows.filter((w) => w.id !== id);
+            if (state.activeWindowId !== id) return { windows };
+
+            const nextActive = windows
+                .filter((w) => !w.minimized)
+                .sort((a, b) => b.zIndex - a.zIndex)[0]?.id ?? null;
+
+            return { windows, activeWindowId: nextActive };
+        });
     },
 
     minimizeWindow: (id) => {
@@ -56,7 +70,7 @@ export const useSystemStore = create((set, get) => ({
                 if (w.id !== id) return w;
                 return {
                     ...w,
-                    maximized: !w.maximized
+                    snap: w.snap === 'maximized' ? null : 'maximized',
                 };
             }),
         }));
@@ -66,7 +80,7 @@ export const useSystemStore = create((set, get) => ({
     restoreWindow: (id) => {
         set((state) => ({
             windows: state.windows.map((w) =>
-                w.id === id ? { ...w, maximized: false } : w
+                w.id === id ? { ...w, snap: null } : w
             ),
         }));
         get().focusWindow(id);
@@ -76,11 +90,10 @@ export const useSystemStore = create((set, get) => ({
         const { nextZIndex } = get();
         set((state) => ({
             activeWindowId: id,
-            zIndexes: { ...state.zIndexes, [id]: nextZIndex },
             nextZIndex: nextZIndex + 1,
             // Also un-minimize if focused
             windows: state.windows.map((w) =>
-                w.id === id ? { ...w, minimized: false } : w
+                w.id === id ? { ...w, minimized: false, zIndex: nextZIndex } : w
             ),
         }));
     },
@@ -100,4 +113,33 @@ export const useSystemStore = create((set, get) => ({
             ),
         }));
     },
+
+    snapWindow: (id, snap) => {
+        set((state) => ({
+            windows: state.windows.map((window) =>
+                window.id === id ? { ...window, snap, minimized: false } : window
+            ),
+        }));
+        get().focusWindow(id);
+    },
+
+    clearSnap: (id) => {
+        set((state) => ({
+            windows: state.windows.map((window) =>
+                window.id === id ? { ...window, snap: null } : window
+            ),
+        }));
+    },
+
+    releaseSnap: (id, position, size) => {
+        set((state) => ({
+            windows: state.windows.map((window) =>
+                window.id === id ? { ...window, snap: null, position, size } : window
+            ),
+        }));
+    },
+
+    toggleDock: () => set((state) => ({ dockVisible: !state.dockVisible })),
+    setWallpaper: (wallpaper) => set({ wallpaper }),
+    resetWindows: () => set({ windows: [], activeWindowId: null, nextZIndex: 1 }),
 }));

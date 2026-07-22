@@ -1,33 +1,62 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import TopBar from './components/system/TopBar';
-import Dock from './components/dock/Dock';
-import Desktop from './components/desktop/Desktop';
-import WindowManager from './components/window/WindowManager';
-import BootScreen from './components/system/BootScreen';
-import MobileWarning from './components/system/MobileWarning';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { OSLayout } from './components/os/OSLayout';
+import { PortfolioLayout } from './components/portfolio/PortfolioLayout';
+import { useMediaQuery } from './hooks/useMediaQuery';
+import { useTheme } from './hooks/useTheme';
+
+const MotionDiv = motion.div;
 
 function App() {
-  const [booting, setBooting] = useState(true);
+  const [mode, setMode] = useState('portfolio');
+  const [booting, setBooting] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  useTheme();
+
+  useEffect(() => {
+    if (!isDesktop && mode === 'os') {
+      setBooting(false);
+      setMode('portfolio');
+    }
+  }, [isDesktop, mode]);
+
+  const launchOS = () => {
+    if (!isDesktop) return;
+    setBooting(true);
+    setMode('os');
+  };
+
+  const exitOS = () => {
+    setBooting(false);
+    setMode('portfolio');
+  };
 
   return (
-    <>
-      <MobileWarning />
-
-      <AnimatePresence>
-        {booting && <BootScreen onComplete={() => setBooting(false)} />}
-      </AnimatePresence>
-
-      <div className="h-screen w-screen overflow-hidden bg-[url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center text-white hidden md:block">
-        <TopBar />
-
-        <Desktop />
-
-        <WindowManager />
-
-        <Dock />
-      </div>
-    </>
+    <AnimatePresence mode="wait">
+      {mode === 'portfolio' ? (
+        <MotionDiv
+          key="portfolio"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <PortfolioLayout onLaunchOS={launchOS} />
+        </MotionDiv>
+      ) : (
+        <MotionDiv
+          key="os"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="h-screen w-screen overflow-hidden"
+        >
+          <OSLayout booting={booting} onBootComplete={() => setBooting(false)} onExitPortfolio={exitOS} />
+        </MotionDiv>
+      )}
+    </AnimatePresence>
   );
 }
 

@@ -1,5 +1,5 @@
 import { motion, useMotionValue } from 'framer-motion';
-import { AppWindow, Hexagon, ScrollText, Activity, Monitor, Terminal } from 'lucide-react';
+import { AppWindow, Hexagon, ScrollText, Activity, Monitor, Terminal as TerminalIcon } from 'lucide-react';
 import DockItem from './DockItem';
 
 import Finder from '../modules/Finder';
@@ -7,6 +7,9 @@ import Kernel from '../modules/Kernel';
 import Apps from '../modules/Apps';
 import Logs from '../modules/Logs';
 import MonitorComp from '../modules/Monitor';
+import { Terminal } from '../os/apps/Terminal';
+
+const MotionDiv = motion.div;
 
 const dockItems = [
     { id: 'finder', label: 'Finder', icon: Hexagon, component: Finder },
@@ -14,7 +17,7 @@ const dockItems = [
     { id: 'apps', label: 'Apps', icon: AppWindow, component: Apps },
     { id: 'logs', label: 'Logs', icon: ScrollText, component: Logs },
     { id: 'monitor', label: 'Monitor', icon: Monitor, component: MonitorComp },
-    { id: 'terminal', label: 'Terminal', icon: Terminal, component: () => <div className="p-4">Terminal (Coming Soon)</div> },
+    { id: 'terminal', label: 'Terminal', icon: TerminalIcon, component: Terminal },
 ];
 
 export default function Dock() {
@@ -22,7 +25,7 @@ export default function Dock() {
 
     return (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
-            <motion.div
+            <MotionDiv
                 onMouseMove={(e) => mouseX.set(e.pageX)}
                 onMouseLeave={() => mouseX.set(Infinity)}
                 className="flex items-end h-16 px-4 bg-white/20 border border-white/20 backdrop-blur-xl rounded-2xl shadow-2xl"
@@ -35,7 +38,7 @@ export default function Dock() {
                         windowId={item.id}
                     />
                 ))}
-            </motion.div>
+            </MotionDiv>
         </div>
     );
 }

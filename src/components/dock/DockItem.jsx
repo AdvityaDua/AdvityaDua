@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react';
+import { createElement, useRef, useState } from 'react';
 import { motion, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { useSystemStore } from '../../store/systemStore';
+
+const MotionDiv = motion.div;
 
 export default function DockItem({ mouseX, icon: Icon, label, windowId, component }) {
     const ref = useRef(null);
@@ -21,18 +23,18 @@ export default function DockItem({ mouseX, icon: Icon, label, windowId, componen
         <div className="relative flex flex-col items-center">
             <AnimatePresence>
                 {isHovered && (
-                    <motion.div
+                    <MotionDiv
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: -20 }}
                         exit={{ opacity: 0, y: -10 }}
                         className="absolute -top-4 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-xs text-white border border-white/10 whitespace-nowrap"
                     >
                         {label}
-                    </motion.div>
+                    </MotionDiv>
                 )}
             </AnimatePresence>
 
-            <motion.div
+            <MotionDiv
                 ref={ref}
                 style={{ width }}
                 onMouseEnter={() => setHovered(true)}
@@ -41,8 +43,8 @@ export default function DockItem({ mouseX, icon: Icon, label, windowId, componen
                 onClick={() => openWindow(windowId, label, component)}
                 whileTap={{ scale: 0.85 }}
             >
-                <Icon className="text-white w-3/5 h-3/5" />
-            </motion.div>
+                {createElement(Icon, { className: 'text-white w-3/5 h-3/5' })}
+            </MotionDiv>
 
             <div className={`w-1 h-1 rounded-full bg-white mb-1 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
         </div>

@@ -58,38 +58,39 @@ export default function Finder() {
     const currentFiles = mockFiles[activeCategory] || [];
 
     return (
-        <div className="h-full flex text-black dark:text-white bg-white dark:bg-[#1E1E1E]">
+        <div className="finder-surface h-full min-h-0 overflow-hidden flex text-black dark:text-white">
             {/* Sidebar */}
-            <div className="w-48 bg-gray-100/80 dark:bg-[#2A2A2A]/90 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 pt-4 flex flex-col gap-6 text-sm select-none">
+            <aside className="finder-sidebar w-48 shrink-0 overflow-y-auto pt-4 text-sm select-none">
                 {sidebarItems.map((group) => (
-                    <div key={group.section} className="px-2">
+                    <div key={group.section} className="mb-5 px-2 last:mb-3">
                         <h3 className="px-2 text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">{group.section}</h3>
                         <div className="flex flex-col gap-0.5">
                             {group.items.map((item) => (
-                                <div
+                                <button
+                                    type="button"
                                     key={item.id}
                                     onClick={() => setActiveCategory(item.id)}
-                                    className={`flex items-center gap-2 px-2 py-1 rounded-md cursor-default transition-colors ${activeCategory === item.id
-                                        ? 'bg-blue-500 text-white'
-                                        : 'hover:bg-gray-200 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300'
+                                    className={`flex w-full items-center gap-2 rounded-md px-2 py-1 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-emerald-300 ${activeCategory === item.id
+                                        ? 'bg-emerald-300 text-zinc-950'
+                                        : 'hover:bg-white/8 text-zinc-300'
                                         }`}
                                 >
-                                    <item.icon className={`w-4 h-4 ${activeCategory === item.id ? 'text-white' : 'text-blue-500'}`} />
+                                    <item.icon className={`w-4 h-4 ${activeCategory === item.id ? 'text-zinc-950' : 'text-emerald-300/85'}`} />
                                     <span>{item.label}</span>
-                                </div>
+                                </button>
                             ))}
                         </div>
                     </div>
                 ))}
-            </div>
+            </aside>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col bg-white dark:bg-[#1E1E1E]">
+            <div className="min-w-0 min-h-0 flex-1 flex flex-col bg-zinc-950/35">
                 {/* Finder Toolbar (Mock) */}
-                <div className="h-10 border-b border-gray-200 dark:border-white/10 flex items-center px-4 gap-4 text-gray-500 justify-between">
+                <div className="finder-toolbar flex h-10 shrink-0 items-center justify-between gap-4 px-4 text-zinc-500">
                     <div className="flex gap-4 items-center">
                         <div className="flex gap-2">
-                            <ChevronRight className="w-5 h-5 rotate-180 opacity-50 cursor-pointer hover:bg-gray-200 dark:hover:bg-white/10 rounded" />
+                            <ChevronRight className="w-5 h-5 rotate-180 opacity-50 cursor-pointer hover:bg-white/10 rounded" />
                             <ChevronRight className="w-5 h-5 opacity-50 cursor-not-allowed" />
                         </div>
                         <span className="font-semibold text-black dark:text-white capitalize">
@@ -100,7 +101,7 @@ export default function Finder() {
 
                 {/* File Grid */}
                 <div
-                    className="flex-1 p-4 overflow-y-auto"
+                    className="min-h-0 flex-1 overflow-y-auto p-4"
                     onClick={() => setSelectedFile(null)}
                 >
                     {currentFiles.length === 0 ? (
@@ -109,15 +110,15 @@ export default function Finder() {
                             <p>Folder is empty</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-4 content-start">
+                        <div className="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] content-start gap-4">
                             {currentFiles.map((file) => (
                                 <div
                                     key={file.id}
                                     onClick={(e) => { e.stopPropagation(); setSelectedFile(file.id); }}
                                     onDoubleClick={() => handleDoubleClick(file)}
-                                    className={`flex flex-col items-center p-2 rounded-lg cursor-default border group ${selectedFile === file.id
-                                        ? 'bg-blue-100/50 dark:bg-white/10 border-blue-200 dark:border-white/20'
-                                        : 'hover:bg-gray-50 dark:hover:bg-white/5 border-transparent'
+                                    className={`group flex min-w-0 w-full flex-col items-center rounded-md border p-2 cursor-default ${selectedFile === file.id
+                                        ? 'bg-emerald-300/10 border-emerald-300/40'
+                                        : 'hover:bg-white/5 border-transparent'
                                         }`}
                                 >
                                     <div className="w-16 h-20 mb-2 flex items-center justify-center relative">
@@ -150,9 +151,9 @@ export default function Finder() {
                                             </div>
                                         )}
                                     </div>
-                                    <span className={`text-xs text-center px-1.5 py-0.5 rounded leading-tight w-full break-words ${selectedFile === file.id
-                                        ? 'bg-blue-500 text-white'
-                                        : 'text-gray-700 dark:text-gray-300'
+                                    <span className={`w-full max-w-full break-words rounded px-1.5 py-0.5 text-center text-xs leading-tight ${selectedFile === file.id
+                                        ? 'bg-emerald-300 text-zinc-950'
+                                        : 'text-zinc-300'
                                         }`}>
                                         {file.label}
                                     </span>

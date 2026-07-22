@@ -1,109 +1,103 @@
-# Hi 👋, I'm Advitya Dua
+# Hi, I'm Advitya Dua
 
-🚀 Full Stack Developer | 🤖 AI & ML Enthusiast | 💻 Computer Engineering Student  
+**AI Engineer · Full-Stack Developer · Backend Systems Builder · Computer Engineering Student**
 
-Motivated and technically driven **B.E. Computer Engineering student** with hands-on experience in **full-stack development**, **AI-powered systems**, and **backend engineering**. I enjoy building scalable applications that combine clean system design with real-world impact.
+I build production-grade intelligent systems, cloud products, and interfaces that make complex technology easier to use. My work sits at the intersection of applied AI, distributed backends, product engineering, and thoughtful user experience.
 
----
+I am currently pursuing a B.E. in Computer Engineering at Thapar Institute of Engineering and Technology.
 
-## 👨‍💻 About Me
-- 🎓 B.E. Computer Engineering @ Thapar Institute of Engineering & Technology  
-- 🧠 Strong foundation in **Python**, **Django**, and **REST APIs**
-- 🌐 Experienced with **React-based frontends** and backend integrations
-- 🤖 Worked on **ML inference pipelines** and AI-driven web platforms
-- 🏥 Interested in healthcare tech, data analytics, and applied AI
-- 🚀 Open to internships, full-time roles & open-source contributions  
+## What I Work On
 
----
+- Production AI systems, RAG pipelines, autonomous agents, and GPU inference
+- Distributed backend services, asynchronous processing, and document intelligence
+- Multi-tenant SaaS products with secure organization and role-based workflows
+- React interfaces that make data-heavy technical products clear and useful
+- Cloud-native deployment, CI/CD, observability, and infrastructure automation
 
-## 🛠️ Tech Stack
+## Selected Work
 
-### Programming Languages
-- Python, C++, JavaScript, TypeScript  
-- Object-Oriented Programming (OOP)
+### TenderHub
 
-### Frontend
-- React.js  
-- HTML, CSS  
+Multi-tenant SaaS platform for government tender discovery, document processing, and collaborative bid management.
 
-### Backend
-- Django  
-- Django REST Framework  
-- Flask  
+- Built an asynchronous ingestion pipeline with Celery, Redis, and Selenium
+- Developed a modular PDF parsing engine with PyMuPDF and Pydantic validation
+- Designed services with Django REST Framework, PostgreSQL, Cloudflare R2, and JWT authentication
+- Built a React dashboard with organization workflows, RBAC, real-time notifications, and tender collaboration
+- Automated production deployments with GitHub Actions and Oracle Cloud
+- Recognized among the **Top 20 teams** in the OkCredit Future Founders Internship
 
-### Databases
-- PostgreSQL  
-- MongoDB  
-- MySQL, SQL  
-- Redis  
+### TeachAI
 
-### AI / ML
-- PyTorch  
-- OpenCV  
-- Model inference & deployment workflows  
+Production-scale multimodal RAG platform built for faculty research and deployed on NVIDIA infrastructure.
 
-### DevOps & Tools
-- Git & GitHub  
-- Docker  
-- CI/CD Pipelines  
-- AWS, Oracle Cloud  
-- Linux, Agile methodologies  
+- Worked with Llama 3.3 70B, Qwen2-VL, Qdrant, Whisper, and vLLM
+- Improved first-token latency from 10 seconds to 2 seconds through GPU optimization and reranking
+- Designed a multi-service architecture for retrieval, inference, and document intelligence
 
----
+### Swasthya Setu
 
-## 🚀 Featured Projects
+AI healthcare platform built around accessible diagnosis support, multilingual interaction, and patient follow-up workflows.
 
-### 🏥 Swasthya Setu  
-**AI Medical Diagnostics Web Application**  
-- Built a full-stack platform using **Django, REST APIs, React, and PostgreSQL**
-- Designed backend logic for managing medical tests, predictions, and risk levels
-- Integrated **deep learning inference** into production workflows
-- Focused on secure data handling and scalable API-driven architecture
+- Integrated AI diagnosis with GradCAM reports and prescription generation
+- Built voice support and offline-friendly workflows for broader accessibility
 
----
+### MediMind
 
-### 📦 MediMind  
-**Smart AI Inventory Management System**  
-- Developed a healthcare analytics platform using **React & Django**
-- Automated **OCR-based invoice processing → inventory sync**
-- Built backend services for sales tracking, alerts, analytics, and role-based access
-- Implemented **ML-driven insights** for demand forecasting and reorder recommendations
+AI inventory forecasting platform for medicine manufacturers and pharmacies.
 
----
+- Built demand forecasting, inventory optimization, and intelligent reorder recommendations
+- Designed workflows for invoice processing, inventory synchronization, analytics, and alerts
 
-### 🔍 GeM Web Scraper (Solo Project)  
-**Automated Tender Data Extraction System**  
-- Built a Python-based scraper for the **Government e-Marketplace (GeM)**
-- Automated downloading & organization of tender documents with metadata
-- Integrated **MongoDB** for structured storage and retrieval
-- Designed the base architecture for a tender management system
+## Experience
 
----
+**Future Founders Intern — OkCredit**
+May 2026 - July 2026 · Remote, India
 
-## 🏆 Achievements & Certifications
-- 🥇 **Cyber AI Hackathon – Innovation Award Winner** (University of Derby)
-- 🏁 **SatHack 2025 – Finalist**
-- 🏆 Top 10 Ranker in Diploma (CSE)
-- 🥈 Silver Medal – Inter-College Football & Badminton
-- 🎯 SIH 2023 Inter-College Hackathon Qualifier
-- 📜 Meta & Coursera Certifications (HTML, CSS, JS, Version Control)
-- 🤖 NIELIT 6-Week Summer Training in AI/ML
+Built TenderHub from problem discovery through a working product, with a focus on scalable ingestion, structured document processing, secure backend services, and collaborative workflows. Awarded a **Certificate of Excellence** for ranking among the Top 20 teams of the cohort.
 
----
+**SWE Intern (AI & Backend) — AIForJob.ai**
+January 2026 - June 2026
 
-## 📌 Currently Focusing On
-- Building production-ready backend systems
-- Deploying ML models efficiently
-- Improving system design & scalability
-- Preparing for **GSOC & open-source contributions**
+Engineered an adaptive interview platform serving 500+ live sessions, including LangGraph agents, resume intelligence, Gemini evaluation, RAG workflows, and GCP deployment.
 
----
+## Technical Focus
 
-## 🤝 Connect With Me
-- 💼 LinkedIn: https://linkedin.com/in/advitya-dua  
-- 💻 GitHub: https://github.com/AdvityaDua  
-- 📧 Email: duaadvitya@gmail.com  
+| Area | Technologies |
+| --- | --- |
+| Languages | Python, JavaScript, TypeScript, C++, SQL |
+| Backend | Django, Django REST Framework, FastAPI, Flask, Celery, REST APIs |
+| Frontend | React, Next.js, HTML, CSS, Tailwind CSS |
+| AI / ML | PyTorch, Hugging Face, LangChain, LangGraph, RAG, vLLM, Whisper, Transformers |
+| Data | PostgreSQL, MongoDB, MySQL, Redis, ChromaDB, Qdrant |
+| Cloud | GCP, AWS, Oracle Cloud, Docker, Kubernetes, Cloudflare R2 |
+| Engineering | Distributed Systems, System Design, MLOps, CI/CD, GitHub Actions |
 
----
+## Recognition & Certifications
 
-⭐️ *Always open to collaboration, learning, and building impactful software.*
+- Certificate of Excellence, OkCredit Future Founders Internship — **Top 20 teams**
+- Google Cloud Certified Associate Cloud Engineer
+- Oracle Cloud Infrastructure 2025 Certified Foundations Associate
+- SabkaAI Innovation Award Winner
+- Cyber AI Hackathon Innovation Award Winner
+- Drishti NE Hackathon Finalist
+- SatHack 2025 Finalist
+- Smart India Hackathon 2023 Inter-College Qualifier
+- Top 10 Diploma CSE ranker
+
+## Beyond Code
+
+I enjoy turning ambiguous problems into systems people can actually use. I care about strong fundamentals, clear interfaces, reliable infrastructure, and the small details that make software feel considered.
+
+Outside engineering, I have earned recognition in inter-college football and badminton, and I am always looking for the next difficult problem worth building around.
+
+## Find Me Online
+
+- [LinkedIn](https://linkedin.com/in/advitya-dua)
+- [GitHub](https://github.com/AdvityaDua)
+- [Email](mailto:duaadvitya@gmail.com)
+- [Portfolio](https://advitya-dua.dev)
+
+<p align="center">
+  <i>Building useful systems, one careful abstraction at a time.</i>
+</p>
